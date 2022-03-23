@@ -85,7 +85,7 @@ class Table:
         :param new_value: new value
         :return: None
         """
-        self.table_list[pos[1]][pos[0]] += new_value
+        self.table_list[pos[1] % self.rows][pos[0] % self.columns] += new_value
         self.draw_table()
 
     def get_value(self, pos: tuple):
@@ -102,7 +102,7 @@ class Table:
         :param pos: position of element (column, row)
         :return: length of string
         """
-        return len(self.table_list[pos[1]][pos[0]]) * 9
+        return len(self.table_list[pos[1] % self.rows][pos[0] % self.columns]) * 9
 
     def get_pos(self, coordinates: tuple):
         """

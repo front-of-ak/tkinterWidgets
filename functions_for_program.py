@@ -11,12 +11,13 @@ def next_cur_pos(keysym: str, table: Table):
         table.cur_pos[0] += 1
     if keysym == 'Left':
         table.cur_pos[0] -= 1
+    table.cur_pos = [table.cur_pos[0] % table.columns, table.cur_pos[1] % table.rows]
     table.move_cursor(table.cur_pos[1] % table.rows, table.cur_pos[0] % table.columns)
 
 
 def analyze_value(n_value, table: Table):
     """check input value in current cell"""
-    cur_value = table.table_list[table.cur_pos[1]][table.cur_pos[0]]
+    cur_value = table.table_list[table.cur_pos[1] % table.rows][table.cur_pos[0] % table.columns]
     if not (((n_value.isdigit() and len(cur_value) <= 4) or (n_value.isdigit() and
                                                              len(cur_value) == 5 and cur_value.count('.') == 1)) or
             (n_value == '.' and cur_value.count('.') == 0 and 0 < len(cur_value) <= 4)):
